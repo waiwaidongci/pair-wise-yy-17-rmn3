@@ -17,6 +17,24 @@
       "history": [
         { "at": "2026-06-14T08:00:00.000Z", "action": "创建", "note": "样点建档" }
       ]
+    },
+    {
+      "id": "site-seed-2",
+      "cave": "北麓三号洞",
+      "zone": "石笋厅",
+      "pointCode": "D-11",
+      "route": "东线巡测",
+      "sensitivity": "中",
+      "protectedStatus": "常规观察",
+      "baselineTemp": 15.8,
+      "baselineHumidity": 90,
+      "baselineCo2": 640,
+      "note": "旅游路线外侧，游客不可达",
+      "createdAt": "2026-06-14T08:30:00.000Z",
+      "updatedAt": "2026-06-14T08:30:00.000Z",
+      "history": [
+        { "at": "2026-06-14T08:30:00.000Z", "action": "创建", "note": "样点建档" }
+      ]
     }
   ],
   "surveys": [
@@ -39,5 +57,129 @@
         { "at": "2026-06-18T10:00:00.000Z", "action": "创建", "note": "CO2升高并有干扰痕迹" }
       ]
     }
-  ]
+  ],
+  "bottles": [
+    {
+      "id": "bottle-seed-1",
+      "bottleCode": "W-001",
+      "siteId": "site-seed-1",
+      "sampler": "沈宁",
+      "sampledAt": "2026-09-23T00:30:00.000Z",
+      "status": "待复检",
+      "note": "",
+      "createdAt": "2026-09-23T00:40:00.000Z",
+      "updatedAt": "2026-09-23T04:20:00.000Z",
+      "history": [
+        { "at": "2026-09-23T04:20:00.000Z", "action": "到站登记", "note": "洞口集散点温度越限，转待复检" },
+        { "at": "2026-09-23T02:00:00.000Z", "action": "装车", "note": "冷箱 BX-01" },
+        { "at": "2026-09-23T00:40:00.000Z", "action": "创建", "note": "样品瓶登记" }
+      ]
+    },
+    {
+      "id": "bottle-seed-2",
+      "bottleCode": "W-002",
+      "siteId": "site-seed-2",
+      "sampler": "陆远",
+      "sampledAt": "2026-09-23T01:10:00.000Z",
+      "status": "待复检",
+      "note": "",
+      "createdAt": "2026-09-23T01:20:00.000Z",
+      "updatedAt": "2026-09-23T04:20:00.000Z",
+      "history": [
+        { "at": "2026-09-23T04:20:00.000Z", "action": "到站登记", "note": "洞口集散点温度越限，转待复检" },
+        { "at": "2026-09-23T02:00:00.000Z", "action": "装车", "note": "冷箱 BX-01" },
+        { "at": "2026-09-23T01:20:00.000Z", "action": "创建", "note": "样品瓶登记" }
+      ]
+    },
+    {
+      "id": "bottle-seed-3",
+      "bottleCode": "W-003",
+      "siteId": "site-seed-1",
+      "sampler": "沈宁",
+      "sampledAt": "2026-09-23T23:00:00.000Z",
+      "status": "待装车",
+      "note": "",
+      "createdAt": "2026-09-23T23:05:00.000Z",
+      "updatedAt": "2026-09-23T23:05:00.000Z",
+      "history": [
+        { "at": "2026-09-23T23:05:00.000Z", "action": "创建", "note": "样品瓶登记" }
+      ]
+    }
+  ],
+  "coldboxes": [
+    {
+      "id": "box-seed-1",
+      "boxCode": "BX-01",
+      "status": "转运中",
+      "currentTransportId": "transport-seed-1",
+      "note": "",
+      "createdAt": "2026-09-20T02:00:00.000Z",
+      "updatedAt": "2026-09-23T02:00:00.000Z",
+      "history": [
+        { "at": "2026-09-23T02:00:00.000Z", "action": "装车发运", "note": "洞口集散点 → 县城中转站 → 实验室" },
+        { "at": "2026-09-20T02:00:00.000Z", "action": "创建", "note": "冷箱登记" }
+      ]
+    },
+    {
+      "id": "box-seed-2",
+      "boxCode": "BX-02",
+      "status": "空闲",
+      "currentTransportId": null,
+      "note": "",
+      "createdAt": "2026-09-20T02:00:00.000Z",
+      "updatedAt": "2026-09-20T02:00:00.000Z",
+      "history": [
+        { "at": "2026-09-20T02:00:00.000Z", "action": "创建", "note": "冷箱登记" }
+      ]
+    }
+  ],
+  "transports": [
+    {
+      "id": "transport-seed-1",
+      "boxId": "box-seed-1",
+      "bottleIds": ["bottle-seed-1", "bottle-seed-2"],
+      "route": "洞口集散点 → 县城中转站 → 实验室",
+      "status": "进行中",
+      "startedAt": "2026-09-23T02:00:00.000Z",
+      "endedAt": null,
+      "createdAt": "2026-09-23T02:00:00.000Z",
+      "updatedAt": "2026-09-23T04:20:00.000Z",
+      "history": [
+        { "at": "2026-09-23T04:20:00.000Z", "action": "到站登记", "note": "洞口集散点 → 待复检" },
+        { "at": "2026-09-23T02:00:00.000Z", "action": "创建", "note": "装车 W-001、W-002" }
+      ]
+    }
+  ],
+  "handoffs": [
+    {
+      "id": "handoff-seed-1",
+      "transportId": "transport-seed-1",
+      "station": "洞口集散点",
+      "arrivedAt": "2026-09-23T04:20:00.000Z",
+      "temperature": 9.4,
+      "receiver": "周航",
+      "sealIntact": true,
+      "sealText": "完好",
+      "issues": ["温度越限（9.4℃，要求 2~8℃）"],
+      "status": "待复检",
+      "conclusion": {
+        "text": "9.4℃ · 封条完好 → 待复检：温度越限（9.4℃，要求 2~8℃）",
+        "samples": [
+          { "bottleId": "bottle-seed-1", "bottleCode": "W-001", "sampler": "沈宁", "sampledAt": "2026-09-23T00:30:00.000Z", "siteLabel": "北麓三号洞 / 滴水帘区 / D-07" },
+          { "bottleId": "bottle-seed-2", "bottleCode": "W-002", "sampler": "陆远", "sampledAt": "2026-09-23T01:10:00.000Z", "siteLabel": "北麓三号洞 / 石笋厅 / D-11" }
+        ],
+        "recheck": null
+      },
+      "recheckBy": "",
+      "recheckResult": "",
+      "recheckNote": "",
+      "recheckedAt": null,
+      "createdAt": "2026-09-23T04:20:00.000Z",
+      "updatedAt": "2026-09-23T04:20:00.000Z",
+      "history": [
+        { "at": "2026-09-23T04:20:00.000Z", "action": "到站登记", "note": "洞口集散点 · 9.4℃ · 待复检" }
+      ]
+    }
+  ],
+  "archives": []
 }

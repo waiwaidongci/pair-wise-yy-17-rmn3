@@ -360,3 +360,111 @@ main {
     grid-template-columns: 1fr;
   }
 }
+
+/* 冷箱转运 */
+.chain-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 420px) 1fr;
+  gap: 18px;
+  align-items: start;
+  margin-bottom: 18px;
+}
+
+.chain-col {
+  display: grid;
+  gap: 18px;
+}
+
+.chain-inline-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+  align-items: end;
+}
+
+.chain-inline-form button {
+  white-space: nowrap;
+}
+
+.chain-checks {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.chain-checks label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.chain-checks input {
+  width: auto;
+}
+
+.chain-position {
+  margin: 8px 0;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.chain-legs {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.chain-leg {
+  border-left: 3px solid var(--line);
+  padding: 8px 10px;
+  background: #fbf9f4;
+  border-radius: 0 6px 6px 0;
+}
+
+.chain-leg.bad {
+  border-left-color: var(--bad);
+  background: rgba(161, 61, 61, .06);
+}
+
+.leg-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.leg-flag {
+  color: var(--bad);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.chain-correct {
+  margin-top: 10px;
+}
+
+.chain-correct summary {
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.chain-archive pre {
+  background: #f7f3eb;
+  padding: 10px;
+  border-radius: 6px;
+  overflow: auto;
+  font-size: 12px;
+}
+
+@media (max-width: 980px) {
+  .chain-grid {
+    grid-template-columns: 1fr;
+  }
+}

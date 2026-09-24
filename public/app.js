@@ -203,12 +203,32 @@ function renderCrudView(view) {
   </section>`;
 }
 
+function renderColdChainView(view) {
+  return `<section class="view" id="${view.id}"><div id="chain-root"></div></section>`;
+}
+
 function render() {
   $('#title').textContent = state.config.title;
   document.title = state.config.title;
   $('#lede').textContent = state.config.lede;
-  $('#main').innerHTML = state.config.views.map((view) => view.type === 'dashboard' ? renderDashboardView(view) : renderCrudView(view)).join('');
+  $('#main').innerHTML = state.config.views.map((view) => {
+    if (view.type === 'dashboard') return renderDashboardView(view);
+    if (view.type === 'coldchain') return renderColdChainView(view);
+    return renderCrudView(view);
+  }).join('');
   setTab(state.activeTab || state.config.views[0].id);
+  const chainRoot = $('#chain-root');
+  if (chainRoot && window.ChainPage) {
+    window.ChainPage.render(chainRoot, {
+      db: state.db,
+      config: state.config,
+      api,
+      toast,
+      escapeHtml,
+      fmtDate,
+      reload: load
+    });
+  }
 }
 
 async function load() {

@@ -6,19 +6,34 @@ module.exports = {
     '常规观察': 'ok',
     '正常': 'ok',
     '已复查': 'ok',
+    '复检合格': 'ok',
+    '已送达': 'ok',
+    '空闲': 'ok',
     '重点保护': 'warn',
+    '转运中': 'warn',
+    '进行中': 'warn',
     '异常待复查': 'bad',
+    '待复检': 'bad',
+    '复检不合格': 'bad',
     '暂停开放': 'bad'
   },
   collections: {
     sites: { label: '样点档案' },
-    surveys: { label: '巡测记录' }
+    surveys: { label: '巡测记录' },
+    bottles: { label: '样品瓶' },
+    coldboxes: { label: '冷箱' },
+    transports: { label: '转运批次' },
+    handoffs: { label: '到站交接' },
+    archives: { label: '存档记录' }
   },
   stats: [
     { label: '样点', collection: 'sites' },
     { label: '重点保护', collection: 'sites', filter: { field: 'protectedStatus', value: '重点保护' } },
     { label: '巡测记录', collection: 'surveys' },
-    { label: '待复查', collection: 'surveys', filter: { field: 'status', value: '异常待复查' } }
+    { label: '待复查', collection: 'surveys', filter: { field: 'status', value: '异常待复查' } },
+    { label: '样品瓶', collection: 'bottles' },
+    { label: '转运中', collection: 'transports', filter: { field: 'status', value: '进行中' } },
+    { label: '交接待复检', collection: 'handoffs', filter: { field: 'status', value: '待复检' } }
   ],
   views: [
     {
@@ -90,6 +105,11 @@ module.exports = {
         { label: '照片链接', name: 'photoUrl' },
         { label: '游客干扰痕迹', name: 'disturbance', type: 'textarea', wide: true }
       ]
+    },
+    {
+      id: 'chain',
+      label: '冷箱转运',
+      type: 'coldchain'
     }
   ],
   actions: [
