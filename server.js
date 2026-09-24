@@ -4,6 +4,7 @@ const path = require('path');
 
 const app = express();
 const config = require('./project.config');
+const coldchain = require('./coldchain');
 const PORT = process.env.PORT || config.port || 3900;
 const DB_FILE = path.join(__dirname, 'data', 'db.json');
 
@@ -42,6 +43,8 @@ app.get('/api/db', async (req, res) => {
   }
   res.json(db);
 });
+
+app.use('/api/coldchain', coldchain({ readDb, writeDb, stamp }));
 
 app.post('/api/:collection', async (req, res) => {
   const db = await readDb();

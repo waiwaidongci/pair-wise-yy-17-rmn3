@@ -39,5 +39,139 @@
         { "at": "2026-06-18T10:00:00.000Z", "action": "创建", "note": "CO2升高并有干扰痕迹" }
       ]
     }
-  ]
+  ],
+  "coldboxes": [
+    {
+      "id": "coldbox-seed-1",
+      "boxCode": "CB-01",
+      "status": "空闲",
+      "note": "6瓶位，相变冰排",
+      "createdAt": "2026-09-20T02:00:00.000Z",
+      "updatedAt": "2026-09-20T02:00:00.000Z",
+      "history": [
+        { "at": "2026-09-20T02:00:00.000Z", "action": "创建", "note": "冷箱建档" }
+      ]
+    },
+    {
+      "id": "coldbox-seed-2",
+      "boxCode": "CB-02",
+      "status": "转运中",
+      "note": "12瓶位，配温度记录仪",
+      "createdAt": "2026-09-20T02:00:00.000Z",
+      "updatedAt": "2026-09-22T00:00:00.000Z",
+      "history": [
+        { "at": "2026-09-22T00:00:00.000Z", "action": "装箱发运", "note": "批次 transport-seed-1" },
+        { "at": "2026-09-20T02:00:00.000Z", "action": "创建", "note": "冷箱建档" }
+      ]
+    }
+  ],
+  "bottles": [
+    {
+      "id": "bottle-seed-1",
+      "bottleCode": "W-01",
+      "siteId": "site-seed-1",
+      "sampler": "沈宁",
+      "sampledAt": "2026-09-21T22:00:00.000Z",
+      "note": "",
+      "status": "待复检",
+      "currentTransportId": "transport-seed-1",
+      "currentStation": "县城冷链站",
+      "createdAt": "2026-09-21T22:05:00.000Z",
+      "updatedAt": "2026-09-23T01:30:00.000Z",
+      "history": [
+        { "at": "2026-09-23T01:30:00.000Z", "action": "转待复检", "note": "县城冷链站 交接异常" },
+        { "at": "2026-09-22T00:00:00.000Z", "action": "装箱发运", "note": "冷箱 CB-02 · 西线巡测 → 实验室" },
+        { "at": "2026-09-21T22:05:00.000Z", "action": "创建", "note": "样品瓶登记" }
+      ]
+    },
+    {
+      "id": "bottle-seed-2",
+      "bottleCode": "W-02",
+      "siteId": "site-seed-1",
+      "sampler": "沈宁",
+      "sampledAt": "2026-09-21T22:10:00.000Z",
+      "note": "",
+      "status": "待复检",
+      "currentTransportId": "transport-seed-1",
+      "currentStation": "县城冷链站",
+      "createdAt": "2026-09-21T22:15:00.000Z",
+      "updatedAt": "2026-09-23T01:30:00.000Z",
+      "history": [
+        { "at": "2026-09-23T01:30:00.000Z", "action": "转待复检", "note": "县城冷链站 交接异常" },
+        { "at": "2026-09-22T00:00:00.000Z", "action": "装箱发运", "note": "冷箱 CB-02 · 西线巡测 → 实验室" },
+        { "at": "2026-09-21T22:15:00.000Z", "action": "创建", "note": "样品瓶登记" }
+      ]
+    },
+    {
+      "id": "bottle-seed-3",
+      "bottleCode": "W-03",
+      "siteId": "site-seed-1",
+      "sampler": "周雨",
+      "sampledAt": "2026-09-23T21:30:00.000Z",
+      "note": "补采对照样",
+      "status": "待装运",
+      "currentTransportId": null,
+      "currentStation": "",
+      "createdAt": "2026-09-23T21:40:00.000Z",
+      "updatedAt": "2026-09-23T21:40:00.000Z",
+      "history": [
+        { "at": "2026-09-23T21:40:00.000Z", "action": "创建", "note": "样品瓶登记" }
+      ]
+    }
+  ],
+  "transports": [
+    {
+      "id": "transport-seed-1",
+      "boxId": "coldbox-seed-2",
+      "bottleIds": ["bottle-seed-1", "bottle-seed-2"],
+      "route": "西线巡测 → 实验室",
+      "note": "",
+      "status": "转运中",
+      "currentStation": "县城冷链站",
+      "startedAt": "2026-09-22T00:00:00.000Z",
+      "endedAt": null,
+      "createdAt": "2026-09-22T00:00:00.000Z",
+      "updatedAt": "2026-09-23T01:30:00.000Z",
+      "history": [
+        { "at": "2026-09-23T01:30:00.000Z", "action": "到站登记", "note": "县城冷链站 · 转待复检" },
+        { "at": "2026-09-22T06:00:00.000Z", "action": "到站登记", "note": "山门中转站" },
+        { "at": "2026-09-22T00:00:00.000Z", "action": "装箱发运", "note": "" }
+      ]
+    }
+  ],
+  "handoffs": [
+    {
+      "id": "handoff-seed-1",
+      "transportId": "transport-seed-1",
+      "station": "山门中转站",
+      "arrivedAt": "2026-09-22T06:00:00.000Z",
+      "temperature": 5.2,
+      "receiver": "王岚",
+      "sealIntact": true,
+      "result": "正常",
+      "note": "",
+      "createdAt": "2026-09-22T06:00:00.000Z",
+      "updatedAt": "2026-09-22T06:00:00.000Z",
+      "history": [
+        { "at": "2026-09-22T06:00:00.000Z", "action": "到站登记", "note": "山门中转站 · 5.2℃ · 王岚" }
+      ]
+    },
+    {
+      "id": "handoff-seed-2",
+      "transportId": "transport-seed-1",
+      "station": "县城冷链站",
+      "arrivedAt": "2026-09-23T01:30:00.000Z",
+      "temperature": 9.6,
+      "receiver": "王岚",
+      "sealIntact": true,
+      "result": "待复检",
+      "note": "到站温度超出2-8℃",
+      "createdAt": "2026-09-23T01:30:00.000Z",
+      "updatedAt": "2026-09-23T01:30:00.000Z",
+      "history": [
+        { "at": "2026-09-23T01:30:00.000Z", "action": "到站登记", "note": "县城冷链站 · 9.6℃ · 王岚" }
+      ]
+    }
+  ],
+  "reviews": []
 }

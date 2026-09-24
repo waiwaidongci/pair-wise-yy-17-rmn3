@@ -1,24 +1,43 @@
 module.exports = {
   port: 3912,
   title: '钟乳石洞穴微环境巡测',
-  lede: '围绕洞穴、分区、样点和巡测路线记录微环境数据，发现异常后生成复查闭环。',
+  lede: '围绕洞穴、分区、样点和巡测路线记录微环境数据，发现异常后生成复查闭环；水样冷箱转运逐站登记交接温度与封条，断链可追溯到具体交接。',
   tones: {
     '常规观察': 'ok',
     '正常': 'ok',
     '已复查': 'ok',
     '重点保护': 'warn',
     '异常待复查': 'bad',
-    '暂停开放': 'bad'
+    '暂停开放': 'bad',
+    '待装运': '',
+    '转运中': 'warn',
+    '待复检': 'bad',
+    '复检合格': 'ok',
+    '复检不合格': 'bad',
+    '已入库': 'ok',
+    '空闲': 'ok',
+    '已结束': '',
+    '合格': 'ok',
+    '不合格': 'bad',
+    '现行': 'ok',
+    '已更正': 'warn'
   },
   collections: {
     sites: { label: '样点档案' },
-    surveys: { label: '巡测记录' }
+    surveys: { label: '巡测记录' },
+    bottles: { label: '样品瓶' },
+    coldboxes: { label: '冷箱' },
+    transports: { label: '转运批次' },
+    handoffs: { label: '交接记录' },
+    reviews: { label: '复检记录' }
   },
   stats: [
     { label: '样点', collection: 'sites' },
     { label: '重点保护', collection: 'sites', filter: { field: 'protectedStatus', value: '重点保护' } },
     { label: '巡测记录', collection: 'surveys' },
-    { label: '待复查', collection: 'surveys', filter: { field: 'status', value: '异常待复查' } }
+    { label: '样品瓶', collection: 'bottles' },
+    { label: '在途转运', collection: 'transports', filter: { field: 'status', value: '转运中' } },
+    { label: '待复检交接', collection: 'handoffs', filter: { field: 'result', value: '待复检' } }
   ],
   views: [
     {
@@ -27,6 +46,57 @@ module.exports = {
       type: 'dashboard',
       focusTitle: '异常与复查',
       focus: { collection: 'surveys', field: 'status', values: ['异常待复查'], limit: 8 }
+    },
+    {
+      id: 'coldchain',
+      label: '冷链转运',
+      type: 'coldchain'
+    },
+    {
+      id: 'bottles',
+      label: '样品瓶',
+      collection: 'bottles',
+      formTitle: '新增样品瓶',
+      listTitle: '样品瓶列表',
+      submitLabel: '保存样品瓶',
+      searchPlaceholder: '搜索瓶号、采样员',
+      searchFields: ['bottleCode', 'sampler'],
+      statusField: 'status',
+      statusOptions: ['待装运', '转运中', '待复检', '复检合格', '复检不合格', '已入库'],
+      titleFields: ['bottleCode', 'sampler'],
+      relation: { collection: 'sites', localKey: 'siteId', labelFields: ['cave', 'zone', 'pointCode'] },
+      summaryFields: ['note'],
+      detailFields: [
+        { label: '采样时刻', name: 'sampledAt' },
+        { label: '当前站', name: 'currentStation' }
+      ],
+      defaults: { status: '待装运' },
+      fields: [
+        { label: '瓶号', name: 'bottleCode', required: true },
+        { label: '采样员', name: 'sampler', required: true },
+        { label: '样点', name: 'siteId', type: 'relation', collection: 'sites', labelFields: ['cave', 'zone', 'pointCode'], required: true, wide: true },
+        { label: '采样时刻', name: 'sampledAt', type: 'datetime-local', required: true },
+        { label: '备注', name: 'note', type: 'textarea', wide: true }
+      ]
+    },
+    {
+      id: 'coldboxes',
+      label: '冷箱',
+      collection: 'coldboxes',
+      formTitle: '新增冷箱',
+      listTitle: '冷箱列表',
+      submitLabel: '保存冷箱',
+      searchPlaceholder: '搜索箱号',
+      searchFields: ['boxCode'],
+      statusField: 'status',
+      statusOptions: ['空闲', '转运中'],
+      titleFields: ['boxCode'],
+      summaryFields: ['note'],
+      defaults: { status: '空闲' },
+      fields: [
+        { label: '冷箱编号', name: 'boxCode', required: true },
+        { label: '备注', name: 'note', type: 'textarea', wide: true }
+      ]
     },
     {
       id: 'sites',
